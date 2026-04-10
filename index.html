@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI-Powered Data Science Studio</title>
+  <meta name="description" content="A GitHub Pages ready project for salary prediction and customer segmentation using real browser-based machine learning." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">GitHub Pages Ready • Flat File Project</span>
+        <h1>AI-Powered Data Science Studio</h1>
+        <p>
+          A polished, fully client-side analytics project that cleans dirty data, predicts salary with linear regression,
+          discovers customer segments with K-Means, and runs directly on GitHub Pages without any backend.
+        </p>
+        <div class="hero-actions">
+          <button id="loadAllSamplesBtn" class="btn btn-primary">Load Sample Project Data</button>
+          <a class="btn btn-secondary" href="#workspace">Open Live Dashboard</a>
+        </div>
+        <div class="hero-badges">
+          <span>Real browser-side ML</span>
+          <span>CSV upload support</span>
+          <span>No build step</span>
+          <span>Deploy from repo root</span>
+        </div>
+      </div>
+      <div class="hero-panel glass-card">
+        <div class="mini-stat">
+          <strong id="heroHrRows">0</strong>
+          <span>HR rows processed</span>
+        </div>
+        <div class="mini-stat">
+          <strong id="heroCustomerRows">0</strong>
+          <span>Customers segmented</span>
+        </div>
+        <div class="mini-stat">
+          <strong id="heroSalaryPrediction">$0</strong>
+          <span>15-year salary prediction</span>
+        </div>
+        <div class="mini-stat">
+          <strong id="heroBestK">-</strong>
+          <span>Optimal cluster count</span>
+        </div>
+      </div>
+    </header>
+
+    <main id="workspace">
+      <section class="section intro-section">
+        <div class="section-heading">
+          <h2>What this project does</h2>
+          <p>
+            The page includes two fully working analytics workflows. You can use the built-in sample datasets or upload your own CSV files.
+            All calculations run live in JavaScript so the deployed page remains functional on GitHub Pages.
+          </p>
+        </div>
+        <div class="feature-grid">
+          <article class="glass-card feature-card">
+            <h3>Salary Prediction Audit</h3>
+            <p>Removes duplicates, fills nulls with medians, filters unrealistic rows, removes outliers, trains a regression model, and predicts salary for a candidate with 15 years of experience.</p>
+          </article>
+          <article class="glass-card feature-card">
+            <h3>Customer Segmentation Dashboard</h3>
+            <p>Scales features, applies the elbow method, trains K-Means clustering, computes silhouette score, and assigns a new customer into a loyalty segment.</p>
+          </article>
+          <article class="glass-card feature-card">
+            <h3>Deployment Friendly</h3>
+            <p>Only root-level files are needed. Upload directly to a GitHub repository, enable GitHub Pages, and the project will work with no server setup.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section panel-grid">
+        <article class="glass-card module-card">
+          <div class="module-header">
+            <div>
+              <h2>Salary Prediction Audit</h2>
+              <p>Browser-based supervised learning on a dirty HR dataset.</p>
+            </div>
+            <div class="module-actions">
+              <button id="loadHrSampleBtn" class="btn btn-primary">Load HR Sample</button>
+              <label class="btn btn-secondary file-btn">
+                Upload HR CSV
+                <input id="hrFileInput" type="file" accept=".csv" />
+              </label>
+            </div>
+          </div>
+
+          <div class="input-strip">
+            <label>
+              Predict salary for experience (years)
+              <input id="experienceInput" type="number" min="0" max="50" step="1" value="15" />
+            </label>
+            <button id="runHrBtn" class="btn btn-primary">Run Salary Audit</button>
+          </div>
+
+          <div class="metrics-grid" id="hrMetrics"></div>
+
+          <div class="chart-grid">
+            <div class="chart-card">
+              <h3>Cleaned HR Data and Regression Trend</h3>
+              <div id="salaryChart" class="chart"></div>
+            </div>
+            <div class="chart-card">
+              <h3>Data Quality Summary</h3>
+              <div id="hrQualitySummary" class="summary-box"></div>
+            </div>
+          </div>
+
+          <div class="result-banner" id="salaryPredictionBanner">Load a dataset to generate the salary prediction audit.</div>
+
+          <div class="table-card">
+            <div class="table-head">
+              <h3>Cleaned HR Preview</h3>
+              <span id="hrTableCount">0 rows</span>
+            </div>
+            <div id="hrTable" class="table-wrap"></div>
+          </div>
+        </article>
+
+        <article class="glass-card module-card">
+          <div class="module-header">
+            <div>
+              <h2>Customer Segmentation Dashboard</h2>
+              <p>Browser-based unsupervised clustering with scaling, elbow analysis, and live classification.</p>
+            </div>
+            <div class="module-actions">
+              <button id="loadCustomerSampleBtn" class="btn btn-primary">Load Customer Sample</button>
+              <label class="btn btn-secondary file-btn">
+                Upload Customer CSV
+                <input id="customerFileInput" type="file" accept=".csv" />
+              </label>
+            </div>
+          </div>
+
+          <div class="input-strip two-col">
+            <label>
+              New customer age
+              <input id="ageInput" type="number" min="18" max="90" step="1" value="25" />
+            </label>
+            <label>
+              New customer monthly spend
+              <input id="spendInput" type="number" min="0" step="100" value="2500" />
+            </label>
+            <button id="runCustomerBtn" class="btn btn-primary">Run Segmentation</button>
+          </div>
+
+          <div class="metrics-grid" id="customerMetrics"></div>
+
+          <div class="chart-grid two-up">
+            <div class="chart-card">
+              <h3>Elbow Method</h3>
+              <div id="elbowChart" class="chart"></div>
+            </div>
+            <div class="chart-card">
+              <h3>Clustered Customers</h3>
+              <div id="clusterChart" class="chart"></div>
+            </div>
+          </div>
+
+          <div class="result-banner" id="customerClassificationBanner">Load a dataset to build the segmentation dashboard.</div>
+
+          <div class="table-card">
+            <div class="table-head">
+              <h3>Cluster Profiles</h3>
+              <span id="clusterTableCount">0 clusters</span>
+            </div>
+            <div id="clusterTable" class="table-wrap"></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section project-files">
+        <div class="section-heading">
+          <h2>Included repository files</h2>
+          <p>Everything is intentionally flat so you can upload the files directly to a repository root without reorganizing folders.</p>
+        </div>
+        <div class="file-grid">
+          <span>index.html</span>
+          <span>styles.css</span>
+          <span>app.js</span>
+          <span>hr_dirty_dataset.csv</span>
+          <span>customer_segmentation_data.csv</span>
+          <span>salary_prediction_audit.py</span>
+          <span>customer_segmentation_audit.py</span>
+          <span>requirements.txt</span>
+          <span>README.md</span>
+          <span>.nojekyll</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
