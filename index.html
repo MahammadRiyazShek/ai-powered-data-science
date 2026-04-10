@@ -16,6 +16,7 @@
   <div class="page-shell">
     <header class="hero">
       <div class="hero-copy">
+        <span class="eyebrow">GitHub Pages Ready • Flat File Project</span>
         <h1>AI-Powered Data Science Studio</h1>
         <p>
           A polished, fully client-side analytics project that cleans dirty data, predicts salary with linear regression,
@@ -152,4 +153,52 @@
             <button id="runCustomerBtn" class="btn btn-primary">Run Segmentation</button>
           </div>
 
-          <div class="metrics-grid" id="customerMetrics">
+          <div class="metrics-grid" id="customerMetrics"></div>
+
+          <div class="chart-grid two-up">
+            <div class="chart-card">
+              <h3>Elbow Method</h3>
+              <div id="elbowChart" class="chart"></div>
+            </div>
+            <div class="chart-card">
+              <h3>Clustered Customers</h3>
+              <div id="clusterChart" class="chart"></div>
+            </div>
+          </div>
+
+          <div class="result-banner" id="customerClassificationBanner">Load a dataset to build the segmentation dashboard.</div>
+
+          <div class="table-card">
+            <div class="table-head">
+              <h3>Cluster Profiles</h3>
+              <span id="clusterTableCount">0 clusters</span>
+            </div>
+            <div id="clusterTable" class="table-wrap"></div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section project-files">
+        <div class="section-heading">
+          <h2>Included repository files</h2>
+          <p>Everything is intentionally flat so you can upload the files directly to a repository root without reorganizing folders.</p>
+        </div>
+        <div class="file-grid">
+          <span>index.html</span>
+          <span>styles.css</span>
+          <span>app.js</span>
+          <span>hr_dirty_dataset.csv</span>
+          <span>customer_segmentation_data.csv</span>
+          <span>salary_prediction_audit.py</span>
+          <span>customer_segmentation_audit.py</span>
+          <span>requirements.txt</span>
+          <span>README.md</span>
+          <span>.nojekyll</span>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
